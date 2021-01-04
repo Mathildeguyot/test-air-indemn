@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_01_04_145454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "depositions", force: :cascade do |t|
+    t.string "reason"
+    t.string "excuse"
+    t.string "dep_city"
+    t.string "arr_city"
+    t.datetime "departure"
+    t.datetime "arrival"
+    t.boolean "forward"
+    t.datetime "forward_dep"
+    t.datetime "forward_arr"
+    t.string "delay"
+    t.string "alert_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

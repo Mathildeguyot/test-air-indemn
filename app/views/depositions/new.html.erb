@@ -1,0 +1,26 @@
+<h1>C'est ici !</h1>
+
+
+<%= simple_form_for @deposition, remote: true do |f| %>
+  <h3>1. Problème</h3>
+  <%= f.input :reason, as: :radio_buttons, collection: Deposition::REASON, wrapper: :vertical_collection_inline, label: "Quelle est la raison de votre déposition ?" %>
+  <%= f.input :excuse, as: :radio_buttons, collection: Deposition::EXCUSE, wrapper: :vertical_collection_inline, label: "Quelle explication a été donnée par la compagnie ?" %>
+
+  <h3>2. Informations sur le vol</h3>
+  <%= f.input :dep_city, label: "Ville de départ'" %>
+  <%= f.input :departure, label: "Date et heure de départ" %>
+  <%= f.input :arr_city, label: "Ville d'arrivée'" %>
+  <%= f.input :arrival, label: "Date et heure d'arrivée" %>
+
+  <h3>3. Précisions</h3>
+  <%= f.input :delay, as: :radio_buttons, collection: Deposition::DELAY, wrapper: :vertical_collection_inline, label: "S'il s'agit d'un retard, quel était le retard à l'arrivée ?" %>
+  <%= f.input :alert_date, as: :radio_buttons, collection: Deposition::ALERT, wrapper: :vertical_collection_inline, label: "Combien de temps à l'avance avez-vous été prévenu ?" %>
+
+
+  <h3>4. Réacheminement</h3>
+  <%= f.input :forward, as: :radio_buttons, label: "Un réacheminement vous a-t-il été proposé ?" %>
+  <%= f.input :forward_dep, label: "Si oui, veuillez indiquer l'heure de départ :" %>
+  <%= f.input :forward_arr, label: "Et l'heure d'arrivée :" %>
+
+  <%= f.button :submit %>
+<% end %>
