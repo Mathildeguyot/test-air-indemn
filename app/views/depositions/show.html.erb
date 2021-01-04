@@ -1,0 +1,10 @@
+<% if @deposition.indemn? == true %>
+  <h1>Bonne nouvelle, vous avez le droit à une indemnité !</h1>
+<% else %>
+  <h3>Malheureusement vous n'avez pas le droit à une indemnité...</h3>
+<% end %>
+<p><%= @deposition.distance %></p>
+<h1><%= @deposition.amount %></h1>
+<h1><%= @deposition.intra? %></h1>
+
+<%= link_to 'Déposer une réclamation', new_deposition_path, class: "big-btn" %>
