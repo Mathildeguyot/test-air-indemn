@@ -1,9 +1,10 @@
-<h1>C'est ici !</h1>
+<h1 class="title depo-title">Nouvelle déposition</h1>
 
-
-<%= simple_form_for @deposition do |f| %>
-  <%= render "#{@deposition.current_step}_step", f: f %>
-  <%= f.button :submit, "Suivant", name: "next_button" unless @deposition.last_step? %>
-  <%= f.button :submit, "Retour", name: "back_button" unless @deposition.first_step? %>
-  <%= f.button :submit, "Découvrir mon indemnité" if @deposition.last_step? %>
-<% end %>
+<div class="form">
+  <%= simple_form_for @deposition do |f| %>
+    <%= render "#{@deposition.current_step}_step", f: f %>
+    <%= f.button :submit, "Retour", id:"back_button", name: "back_button" unless @deposition.first_step? %>
+    <%= f.button :submit, "Suivant", id:"next_button", name: "next_button" unless @deposition.last_step? %>
+    <%= f.button :submit, "Découvrir mon indemnité", id:"next_button" if @deposition.last_step? %>
+  <% end %>
+</div>

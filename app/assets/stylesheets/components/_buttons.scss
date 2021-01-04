@@ -19,3 +19,47 @@
 #final-btn {
   margin: 30px;
 }
+
+#next_button {
+  background: linear-gradient(45deg, #35d6b2, #56cfe1);
+  position: relative;
+  left: 65%;
+  top: 24px;
+  color: white;
+  border-radius: 22px;
+  font-weight: 100;
+  font-size: 20px;
+  opacity: 0.9;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    opacity: 1;
+    transition: 0.2s ease-in-out;
+  }
+}
+
+
+#back_button {
+  position: relative;
+  left: 10%;
+  top: 24px;
+  color: #56cfe1;
+  border-radius: 22px;
+  border: 1px solid #56cfe1;
+  font-weight: 200;
+  font-size: 20px;
+  opacity: 0.9;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    opacity: 1;
+    color: white;
+    background-color: #56cfe1;
+    transition: 0.2s ease-in-out;
+  }
+}
+
+
+
+
+
+
+

@@ -41,7 +41,7 @@ class Deposition < ApplicationRecord
     if reason == "Refus d'embarquement"
       return true
     # cas annulation
-    elsif reason == "annul"
+    elsif reason == "Annulation"
       # cas pas prevenu
       if alert_date == "Jamais"
         return true
@@ -60,7 +60,7 @@ class Deposition < ApplicationRecord
       end
     # cas retard
     elsif reason == "Retard"
-      (forward_arr - arrival) * 24 >= 3 && alert_date != "Plus de 14 jours avant le vol" ? true : false
+      delay == "Entre 3h et 4h" && alert_date != "Plus de 14 jours avant le vol" || delay == "Plus de 4h" && alert_date != "Plus de 14 jours avant le vol" ? true : false
     end
   end
 
