@@ -2,11 +2,39 @@ require 'json'
 require 'open-uri'
 
 class Deposition < ApplicationRecord
+
+  attr_writer :current_step
+
   REASON = ["Retard", "Annulation", "Refus d'embarquement"]
   ALERT = ["Plus de 14 jours avant le vol", "Entre 7 et 14 jours avant le vol", "Moins de 7 jours avant le vol", "Jamais"]
   DELAY = ["Moins de 2h", "Entre 2h et 3h", "Entre 3h et 4h", "Plus de 4h" ]
   EXCUSE = ["Conditions météorologiques", "Problème technique", "Grève", "Aucune raison"]
   UE = ["AT", "GF", "FR", "DE", "ES", "PT", "IT", "BE", "BG", "CY", "HR", "DK", "EE", "FI", "GR", "HU", "IE", "LV", "LT", "LU", "MA", "NL", "PL", "RO", "SI", "SK", "SE", "CZ", "MQ"]
+
+  def current_step
+    @current_step || steps.first
+  end
+
+  def steps
+    %w[probleme informations precisions reacheminement]
+  end
+
+  def next_step
+    self.current_step = steps[steps.index(current_step) + 1]
+  end
+
+  def previous_step
+    self.current_step = steps[steps.index(current_step) - 1]
+  end
+
+  def first_step?
+    current_step == steps.first
+  end
+
+  def last_step?
+    current_step == steps.last
+  end
+
 
   def indemn?
     # cas refus d'embarquement
