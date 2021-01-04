@@ -1,11 +1,43 @@
-<% if @deposition.indemn? == true %>
-  <h1>Bonne nouvelle, vous avez le droit à une indemnité !</h1>
-<% else %>
-  <h3>Malheureusement vous n'avez pas le droit à une indemnité...</h3>
-<% end %>
-<p><%= @deposition.distance %></p>
-<h1><%= @deposition.amount %></h1>
-<h1><%= @deposition.intra? %></h1>
+<div class="centering">
+  <% if @deposition.indemn? == true %>
+    <h2>Bonne nouvelle, tu as le droit à une indemnité de <%= @deposition.amount %>€ !</h2>
+    <img src="https://media.giphy.com/media/3oFzmqENRBkRTRfLcA/giphy.gif" style="width: 50%; margin: 40px;">
+  <% else %>
+    <h2>Malheureusement tu n'as le droit à aucune indemnité dans ta situation...</h2>
+    <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/giphy.gif" style="width: 50%; margin: 40px;">
+  <% end %>
 
-<%= link_to 'Déposer une réclamation', new_deposition_path, class: "big-btn" %>
-<%= link_to "Retour à l'acueil", root_path, class: "big-btn" %>
+  <div class="resume">
+    <h3>Résumé de ta déposition</h3>
+    <p>
+      Il s'agit d'un problème de <%= @deposition.reason.downcase %> sur un vol entre <%= @deposition.dep_city %> et
+      <%= @deposition.arr_city %> prévu à <%= @deposition.departure.to_s(:time) %> le <%= @deposition.departure.strftime('%d/%m/%Y') %>.
+    </p>
+    <% if @deposition.reason == "Retard" %>
+      <p>L'avion est arrivé avec un retard de <%= @deposition.delay %>.</p>
+    <% end %>
+    <p>La raison donnée par la compagnie était "<%= @deposition.excuse.downcase %>".</p>
+    <% if @deposition.alert_date == "Jamais" %>
+      <p>Tu n'as jamais était alerté.e par la compagnie.</p>
+    <% else %>
+      <p>La compagnie t'as prévenu.e <%= @deposition.alert_date %>.</p>
+    <% end %>
+    <% if @deposition.forward? %>
+      <p>Un réacheminement t'a été proposé avec un départ à <%= @deposition.forward_dep.to_s(:time) %> le
+        <%= @deposition.forward_dep.strftime('%d/%m/%Y') %> et une arrivée à <%= @deposition.forward_arr.to_s(:time) %> le
+        <%= @deposition.forward_arr.strftime('%d/%m/%Y') %></p>
+    <% else %>
+      <p>Aucun réacheminement ne t'a été proposé.</p>
+    <% end %>
+
+
+  </div>
+
+
+  <div>
+     <p id="final-btn"><%= link_to 'Déposer une nouvelle réclamation', new_deposition_path, class: "big-btn" %></p>
+  </div>
+  <div>
+    <p id="home-btn"><%= link_to "Retour à l'acueil", root_path, class: "big-btn" %></p>
+  </div>
+</div>
