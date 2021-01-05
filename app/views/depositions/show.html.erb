@@ -12,7 +12,7 @@
     <% elsif @deposition.excuse == "Conditions météorologiques" %>
       <p class="p-reason">En effet, les mauvaises conditions météorologiques font partie des raisons qui échappent à la maîtrise de la compagnie.</p>
     <% elsif ["Oubli de billet", "Pas de pièce d'identité", "Embarquement terminé"].include?(@deposition.excuse) %>
-      <p class="p-reason">Et oui, la raison "<%= @deposition.reason.downcase %>" ne dépend que de toi, il faut mieux s'organiser !</p>
+      <p class="p-reason">Et oui, la raison "<%= @deposition.excuse.downcase %>" ne dépend que de toi, il faut mieux s'organiser !</p>
     <% end %>
 
     <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/giphy.gif" style="width: 50%; margin: 40px;">
