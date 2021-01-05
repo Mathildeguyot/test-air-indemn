@@ -1,3 +1,4 @@
-<h3>3. Précisions</h3>
-<%= f.input :delay, as: :radio_buttons, collection: Deposition::DELAY, wrapper: :vertical_collection_inline, label: "S'il s'agit d'un retard, quel était le retard à l'arrivée ?" %>
-<%= f.input :alert_date, as: :radio_buttons, collection: Deposition::ALERT, wrapper: :vertical_collection_inline, label: "Combien de temps à l'avance avez-vous été prévenu ?" %>
+<h3>4. Précisions</h3>
+<%= f.input :delay, as: :radio_buttons, collection: Deposition::DELAY, wrapper: :vertical_collection_inline, label: "Quel était le retard à l'arrivée ?" if @deposition.reason == "Retard" %>
+<%= f.input :alert_date, as: :radio_buttons, collection: Deposition::ALERT, wrapper: :vertical_collection_inline, label: "Quand as-tu été prévenu ?" if @deposition.reason == "Annulation" %>
+<%= f.input :alert_date, as: :radio_buttons, collection: Deposition::ALERT_REFUS, wrapper: :vertical_collection_inline, label: "Quand as-tu été prévenu ?" if @deposition.reason == "Refus d'embarquement" %>

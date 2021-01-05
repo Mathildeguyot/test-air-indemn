@@ -1,0 +1,6 @@
+<h3>2. Explication</h3>
+<% if @deposition.reason == "Refus d'embarquement" %>
+  <%= f.input :excuse, as: :radio_buttons, collection: Deposition::REFUS, wrapper: :vertical_collection_inline, label: "Quelle explication a été donnée par la compagnie ?" %>
+<% else %>
+  <%= f.input :excuse, as: :radio_buttons, collection: Deposition::EXCUSE, wrapper: :vertical_collection_inline, label: "Quelle explication a été donnée par la compagnie ?" %>
+<% end %>
