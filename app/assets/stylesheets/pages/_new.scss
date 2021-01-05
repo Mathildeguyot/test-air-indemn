@@ -1,0 +1,149 @@
+.depo-title {
+  margin-bottom: 25px
+}
+
+.form {
+  h3 {
+    margin-bottom: 20px;
+  }
+}
+
+.deposition_reason {
+  display: flex;
+  justify-content: center;
+  legend {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 200;
+    color: $gray;
+  }
+  .form-check {
+    color: #5e60ce;
+    border: 1px solid;
+    padding: 10px 15px;
+    border-radius: 32px;
+    border-bottom-width: medium;
+    input[type="radio"] {
+      opacity: 0.9;
+      color: #5e60ce;
+    }
+  }
+}
+
+
+
+.deposition_excuse {
+  display: grid;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.deposition_alert_date, .deposition_delay, .deposition_forward {
+  margin-top: 30px;
+  .col-form-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+}
+
+legend {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 200;
+  color: $gray;
+}
+
+
+.deposition_dep_city, .deposition_arr_city, .deposition_departure, .deposition_arrival,
+.deposition_forward_dep, .deposition_forward_arr {
+  label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 200;
+    color: $gray;
+  }
+}
+
+.deposition_forward {
+  display: flex;
+  justify-content: center;
+  .form-check {
+    border: none;
+  }
+}
+
+.form-check {
+  color: #5e60ce;
+  border: 1px solid;
+  margin-bottom: 5px;
+  padding: 10px 15px;
+  border-radius: 32px;
+  border-bottom-width: medium;
+  input[type="radio"] {
+    opacity: 0.9;
+    color: #5e60ce;
+  }
+}
+
+.plane {
+  color: #56cfe1;
+}
+
+#deposition_dep_city {
+  width: 250px;
+}
+
+#deposition_arr_city {
+  width: 250px;
+}
+
+#deposition_arrival_1i {
+  width: 100px;
+  padding: 0px 7px;
+}
+
+#deposition_arrival_2i {
+  width: 124px;
+  padding: 0px 7px;
+}
+
+#deposition_arrival_3i {
+  width: 70px;
+  padding: 0px 7px;
+}
+
+#deposition_arrival_4i {
+  width: 70px;
+  padding: 0px 7px;
+}
+
+#deposition_arrival_5i {
+  width: 70px;
+  padding: 0px 7px;
+}
+
+
+#deposition_departure_1i {
+  width: 100px;
+  padding: 0px 7px;
+}
+
+#deposition_departure_2i {
+  width: 124px;
+  padding: 0px 7px;
+}
+
+#deposition_departure_3i {
+  width: 70px;
+  padding: 0px 7px;
+}
+
+#deposition_departure_4i {
+  width: 70px;
+  padding: 0px 7px;
+}
+
+#deposition_departure_5i {
+  width: 70px;
+  padding: 0px 7px;
+}

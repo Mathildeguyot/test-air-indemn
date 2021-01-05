@@ -1,1 +1,26 @@
 // Specific CSS for your home-page
+.centering {
+  width: 700px;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+
+svg {
+  height: 215px;
+  width: 300px;
+  margin: 20px;
+}
+
+.title {
+  margin-top: 80px;
+  font-weight: 800;
+  color: #35d6b2;
+}
+
+.tagline {
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+
