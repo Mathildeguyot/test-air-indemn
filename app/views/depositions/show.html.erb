@@ -1,9 +1,20 @@
 <div class="centering">
+
   <% if @deposition.indemn? == true %>
     <h2 class="title title-end">Bonne nouvelle, tu as le droit à une indemnité de <%= @deposition.amount %>€ !</h2>
     <img src="https://media.giphy.com/media/3oFzmqENRBkRTRfLcA/giphy.gif" style="width: 50%; margin: 40px;">
+
   <% else %>
     <h2 class="title title-end">Malheureusement tu n'as le droit à aucune indemnité dans ta situation...</h2>
+
+    <% if @deposition.excuse == "Crise sanitaire" %>
+      <p>En effet, la crise sanitaire fait partie des raisons qui échappent à la maîtrise de la compagnie.</p>
+    <% elsif @deposition.excuse == "Conditions météorologiques" %>
+      <p>En effet, les mauvaises conditions météorologiques font partie des raisons qui échappent à la maîtrise de la compagnie.</p>
+    <% elsif ["Oubli de billet", "Pas de pièce d'identité", "Embarquement terminé"].include?(@deposition.excuse) %>
+      <p>Et oui, la raison "<%= @deposition.reason.downcase %>" ne dépend que de toi, il faut mieux s'organiser !</p>
+    <% end %>
+
     <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/giphy.gif" style="width: 50%; margin: 40px;">
   <% end %>
 
@@ -14,13 +25,13 @@
       <%= @deposition.arr_city %> prévu à <%= @deposition.departure.to_s(:time) %> le <%= @deposition.departure.strftime('%d/%m/%Y') %>.
     </p>
     <% if @deposition.reason == "Retard" %>
-      <p>L'avion est arrivé avec un retard de <%= @deposition.delay %>.</p>
+      <p>L'avion est arrivé avec un retard de <%= @deposition.delay.downcase %>.</p>
     <% end %>
     <p>La raison donnée par la compagnie était "<%= @deposition.excuse.downcase %>".</p>
     <% if @deposition.alert_date == "Jamais" %>
       <p>Tu n'as jamais était alerté.e par la compagnie.</p>
     <% else %>
-      <p>La compagnie t'as prévenu.e <%= @deposition.alert_date %>.</p>
+      <p>La compagnie t'as prévenu.e <%= @deposition.alert_date.downcase %>.</p>
     <% end %>
     <% if @deposition.forward? %>
       <p>Un réacheminement t'a été proposé avec un départ à <%= @deposition.forward_dep.to_s(:time) %> le
@@ -29,7 +40,6 @@
     <% else %>
       <p>Aucun réacheminement ne t'a été proposé.</p>
     <% end %>
-
 
   </div>
 

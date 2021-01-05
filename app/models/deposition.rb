@@ -7,8 +7,9 @@ class Deposition < ApplicationRecord
 
   REASON = ["Retard", "Annulation", "Refus d'embarquement"]
   ALERT = ["Plus de 14 jours avant le vol", "Entre 7 et 14 jours avant le vol", "Moins de 7 jours avant le vol", "Jamais"]
-  DELAY = ["Moins de 2h", "Entre 2h et 3h", "Entre 3h et 4h", "Plus de 4h" ]
-  EXCUSE = ["Conditions météorologiques", "Problème technique", "Grève", "Aucune raison"]
+  DELAY = ["Moins de 3h", "3h ou plus"]
+  REFUS = ["Nombre de passagers trop important", "Pas de pièce d'identité", "Oubli de billet", "Embarquement terminé", "Aucune raison"]
+  EXCUSE = ["Conditions météorologiques", "Crise sanitaire", "Problème technique", "Grève", "Aucune raison"]
   UE = ["AT", "GF", "FR", "DE", "ES", "PT", "IT", "BE", "BG", "CY", "HR", "DK", "EE", "FI", "GR", "HU", "IE", "LV", "LT", "LU", "MA", "NL", "PL", "RO", "SI", "SK", "SE", "CZ", "MQ"]
 
   def current_step
@@ -16,7 +17,7 @@ class Deposition < ApplicationRecord
   end
 
   def steps
-    %w[probleme informations precisions reacheminement]
+    %w[probleme explication informations precisions reacheminement]
   end
 
   def next_step
@@ -37,8 +38,11 @@ class Deposition < ApplicationRecord
 
 
   def indemn?
+    # cas probleme de relevant pas de la compagnie
+    if ["Oubli de billet", "Pas de pièce d'identité", "Embarquement terminé", "Conditions météorologiques", "Crise sanitaire"].include?(excuse)
+      return false
     # cas refus d'embarquement
-    if reason == "Refus d'embarquement"
+    elsif reason == "Refus d'embarquement"
       return true
     # cas annulation
     elsif reason == "Annulation"
@@ -49,18 +53,20 @@ class Deposition < ApplicationRecord
       elsif forward?
         # cas prevenu plus de 7 jours a l'avance
         if alert_date == "Entre 7 et 14 jours avant le vol" || alert_date == "Plus de 14 jours avant le vol"
-          (departure - forward_dep) * 24 <= 2 && (forward_arr - arrival) * 24 <= 4 ? false : true
+          (departure - forward_dep) / 3600 <= 2 && (forward_arr - arrival) / 3600 <= 4 ? false : true
         # cas prevenu moins de 7 jours a l'avance
         else
-          (departure - forward_dep) * 24 <= 1 && (forward_arr - arrival) * 24 <= 2 ? false : true
+          (departure - forward_dep) / 3600 <= 1 && (forward_arr - arrival) / 3600 <= 2 ? false : true
         end
       # cas prevenu mais pas de reacheminement
       else
         alert_date == "Plus de 14 jours avant le vol" ? false : true
       end
     # cas retard
-    elsif reason == "Retard"
-      delay == "Entre 3h et 4h" && alert_date != "Plus de 14 jours avant le vol" || delay == "Plus de 4h" && alert_date != "Plus de 14 jours avant le vol" ? true : false
+    elsif reason == "Retard" && delay == "3h ou plus"
+      return true
+    else
+      return false
     end
   end
 
