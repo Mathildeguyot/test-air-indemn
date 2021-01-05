@@ -1,4 +1,7 @@
 class DepositionsController < ApplicationController
+  def index
+  end
+
   def new
     session[:deposition_params] ||= {}
     @deposition = Deposition.new
@@ -8,14 +11,16 @@ class DepositionsController < ApplicationController
     session[:deposition_params].deep_merge!(deposition_params)
     @deposition = Deposition.new(session[:deposition_params])
     @deposition.current_step = session[:deposition_step]
-    if params[:back_button]
-      @deposition.previous_step
-    elsif params[:next_button]
-      @deposition.next_step
-    elsif @deposition.last_step?
-      @deposition.save
+    if @deposition.valid?
+      if params[:back_button]
+        @deposition.previous_step
+      elsif params[:next_button]
+        @deposition.next_step
+      elsif @deposition.last_step?
+        @deposition.save if @deposition.all_valid?
+      end
+      session[:deposition_step] = @deposition.current_step
     end
-    session[:deposition_step] = @deposition.current_step
     if @deposition.new_record?
       render :new
     else

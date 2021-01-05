@@ -5,6 +5,15 @@ class Deposition < ApplicationRecord
 
   attr_writer :current_step
 
+  validates_presence_of :reason, :if => lambda { |d| d.current_step == "probleme" }
+  validates_presence_of :excuse, :if => lambda { |d| d.current_step == "explication" }
+  validates_presence_of :dep_city, :if => lambda { |d| d.current_step == "informations" }
+  validates_presence_of :arr_city, :if => lambda { |d| d.current_step == "informations" }
+  validates_presence_of :delay, :if => lambda { |d| d.current_step == "precisions" && d.reason == "Retard" }
+  validates_presence_of :alert_date, :if => lambda { |d| d.current_step == "precisions" && d.reason != "Retard" }
+  validates :forward, inclusion: { in: [true, false] }, :if => lambda { |d| d.current_step == "reacheminement" }
+
+
   REASON = ["Retard", "Annulation", "Refus d'embarquement"]
   ALERT = ["Plus de 14 jours avant le vol", "Entre 7 et 14 jours avant le vol", "Moins de 7 jours avant le vol", "Jamais"]
   ALERT_REFUS = ["Avant d'arriver à l'aéroport", "À la porte d'embarquement", "Au niveau du contrôle de sécurité"]
@@ -35,6 +44,13 @@ class Deposition < ApplicationRecord
 
   def last_step?
     current_step == steps.last
+  end
+
+  def all_valid?
+    steps.all? do |step|
+      self.current_step = step
+      valid?
+    end
   end
 
 
