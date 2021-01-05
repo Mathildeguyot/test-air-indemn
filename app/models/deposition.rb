@@ -7,6 +7,7 @@ class Deposition < ApplicationRecord
 
   REASON = ["Retard", "Annulation", "Refus d'embarquement"]
   ALERT = ["Plus de 14 jours avant le vol", "Entre 7 et 14 jours avant le vol", "Moins de 7 jours avant le vol", "Jamais"]
+  ALERT_REFUS = ["Avant d'arriver à l'aéroport", "À la porte d'embarquement", "Au niveau du contrôle de sécurité"]
   DELAY = ["Moins de 3h", "3h ou plus"]
   REFUS = ["Nombre de passagers trop important", "Pas de pièce d'identité", "Oubli de billet", "Embarquement terminé", "Aucune raison"]
   EXCUSE = ["Conditions météorologiques", "Crise sanitaire", "Problème technique", "Grève", "Aucune raison"]
