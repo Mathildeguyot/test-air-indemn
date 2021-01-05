@@ -1,9 +1,9 @@
 <div class="centering">
   <% if @deposition.indemn? == true %>
-    <h2>Bonne nouvelle, tu as le droit à une indemnité de <%= @deposition.amount %>€ !</h2>
+    <h2 class="title title-end">Bonne nouvelle, tu as le droit à une indemnité de <%= @deposition.amount %>€ !</h2>
     <img src="https://media.giphy.com/media/3oFzmqENRBkRTRfLcA/giphy.gif" style="width: 50%; margin: 40px;">
   <% else %>
-    <h2>Malheureusement tu n'as le droit à aucune indemnité dans ta situation...</h2>
+    <h2 class="title title-end">Malheureusement tu n'as le droit à aucune indemnité dans ta situation...</h2>
     <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/giphy.gif" style="width: 50%; margin: 40px;">
   <% end %>
 
