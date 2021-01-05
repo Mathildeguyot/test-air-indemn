@@ -1,3 +1,25 @@
 .title-end {
   margin-top: 0px;
 }
+
+.resume {
+  background: white;
+  padding: 30px;
+  text-align: justify;
+  width: 600px;
+  margin: auto;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  p {
+    font-size: 16px;
+    margin-bottom: 4px;
+    font-weight: 200;
+  }
+}
+
+.p-reason {
+  font-size: 18px;
+  font-weight: 200;
+  margin-bottom: 0px;
+  margin-top: 24px;
+}
